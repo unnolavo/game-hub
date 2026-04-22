@@ -57,6 +57,10 @@ button:disabled {
   position: relative;
 }
 
+.app-shell--in-game {
+  background: linear-gradient(180deg, rgba(58, 109, 240, 0.06), rgba(0, 0, 0, 0));
+}
+
 .view {
   display: grid;
   gap: 14px;
@@ -154,6 +158,14 @@ button:disabled {
   gap: 12px;
 }
 
+.menu-note,
+.game-note {
+  margin: 2px 2px 0;
+  text-align: center;
+  color: rgba(244, 247, 255, 0.68);
+  font-size: 0.84rem;
+}
+
 .game-tile {
   text-align: left;
   border-radius: var(--radius-md);
@@ -215,12 +227,22 @@ button:disabled {
   padding: 0;
 }
 
+.ghost-button:focus-visible,
+.icon-button:focus-visible,
+.drawer-button:focus-visible,
+.cta-button:focus-visible,
+.game-tile:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.9);
+  outline-offset: 2px;
+}
+
 .drawer {
   border-radius: var(--radius-lg);
   padding: 14px;
   display: grid;
   gap: 10px;
   transform-origin: top center;
+  animation: drawerIn 140ms ease;
 }
 
 .drawer h3 {
@@ -336,6 +358,17 @@ button:disabled {
   }
 }
 
+@keyframes drawerIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 .toast {
   position: fixed;
   left: 50%;
@@ -348,6 +381,17 @@ button:disabled {
   padding: 10px 14px;
   font-size: 0.9rem;
   box-shadow: var(--shadow-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 @media (min-width: 600px) {

@@ -2,9 +2,13 @@
   App shell behavior
   - Single-page view switching
   - In-game drawer actions
+  - hub polish for smoother transitions
 */
 
 (function () {
+  const TRANSITION_MS = 200;
+
+  const appRoot = document.getElementById("app");
   const menuView = document.getElementById("menu-view");
   const gameView = document.getElementById("game-view");
 
@@ -20,6 +24,7 @@
 
   let soundOn = false;
   let toastTimer = null;
+  let isTransitioning = false;
 
   function showToast(message) {
     if (!toast) return;
@@ -48,28 +53,33 @@
     drawerToggleButton.setAttribute("aria-expanded", String(willOpen));
   }
 
+  function switchView({ fromView, toView, enteringGame }) {
+    if (isTransitioning) return;
+
+    isTransitioning = true;
+
+    toView.hidden = false;
+    requestAnimationFrame(() => {
+      toView.classList.add("view--active");
+      fromView.classList.remove("view--active");
+
+      window.setTimeout(() => {
+        fromView.hidden = true;
+        isTransitioning = false;
+      }, TRANSITION_MS);
+    });
+
+    appRoot?.classList.toggle("app-shell--in-game", enteringGame);
+  }
+
   function showMenu() {
-    menuView.hidden = false;
-    menuView.classList.add("view--active");
-
-    gameView.classList.remove("view--active");
-    window.setTimeout(() => {
-      gameView.hidden = true;
-    }, 170);
-
     closeDrawer();
+    switchView({ fromView: gameView, toView: menuView, enteringGame: false });
   }
 
   function showGame() {
-    gameView.hidden = false;
-    gameView.classList.add("view--active");
-
-    menuView.classList.remove("view--active");
-    window.setTimeout(() => {
-      menuView.hidden = true;
-    }, 170);
-
     closeDrawer();
+    switchView({ fromView: menuView, toView: gameView, enteringGame: true });
   }
 
   function showInstructions() {
