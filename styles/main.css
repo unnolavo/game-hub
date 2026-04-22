@@ -1,0 +1,175 @@
+:root {
+  /* Centralized theme tokens for consistent styling across menu + games. */
+  --color-bg: #0b1020;
+  --color-surface: #131a2f;
+  --color-panel: #1b2340;
+  --color-primary: #3a6df0;
+  --color-accent: #f5b73b;
+  --color-danger: #ef4e4e;
+  --color-text: #f4f7ff;
+
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --shadow-soft: 0 14px 30px rgba(3, 6, 14, 0.45);
+  --max-width: 440px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100dvh;
+  font-family: "Outfit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--color-text);
+  background:
+    radial-gradient(circle at 15% 10%, rgba(58, 109, 240, 0.24), transparent 38%),
+    radial-gradient(circle at 85% 5%, rgba(245, 183, 59, 0.12), transparent 28%),
+    var(--color-bg);
+  display: flex;
+  justify-content: center;
+}
+
+.app-shell {
+  width: min(100%, var(--max-width));
+  min-height: 100dvh;
+  padding: 20px 16px 28px;
+}
+
+.view {
+  display: grid;
+  gap: 18px;
+}
+
+.view[hidden] {
+  display: none;
+}
+
+.menu-header,
+.game-header,
+.game-stage,
+.game-grid .game-tile {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: var(--shadow-soft);
+}
+
+.menu-header,
+.game-stage {
+  border-radius: var(--radius-lg);
+  padding: 18px;
+}
+
+.menu-header h1,
+.game-meta h2 {
+  margin: 4px 0;
+  line-height: 1.1;
+}
+
+.menu-header h1 {
+  font-size: clamp(2rem, 7vw, 2.6rem);
+  letter-spacing: 0.02em;
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  color: rgba(244, 247, 255, 0.8);
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-accent);
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.game-tile {
+  text-align: left;
+  border-radius: var(--radius-md);
+  padding: 14px 12px;
+  min-height: 86px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.game-tile:disabled {
+  opacity: 0.75;
+}
+
+.game-tile__title {
+  font-weight: 700;
+}
+
+.game-tile__status {
+  font-size: 0.84rem;
+  color: rgba(244, 247, 255, 0.75);
+}
+
+.game-tile--primary {
+  background:
+    linear-gradient(175deg, rgba(58, 109, 240, 0.42), rgba(58, 109, 240, 0.12)),
+    var(--color-panel);
+  border-color: rgba(58, 109, 240, 0.75);
+}
+
+.game-header {
+  border-radius: var(--radius-lg);
+  padding: 10px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 10px;
+}
+
+.ghost-button {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text);
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-weight: 600;
+}
+
+.game-stage {
+  min-height: 50dvh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: rgba(244, 247, 255, 0.86);
+}
+
+/* Small touch feedback for premium feel without heavy animation in setup phase. */
+button {
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 120ms ease, filter 120ms ease;
+}
+
+button:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+@media (min-width: 600px) {
+  .app-shell {
+    padding-top: 32px;
+  }
+}
