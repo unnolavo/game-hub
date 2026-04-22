@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Pocket Arcade</title>
+    <meta
+      name="description"
+      content="Pocket Arcade - mobile-first mini game hub featuring Connect 4 and more."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <main class="app-shell" id="app">
+      <!-- MENU VIEW: home screen for selecting games. -->
+      <section class="view view--active" id="menu-view" aria-labelledby="app-title">
+        <header class="menu-header panel">
+          <p class="eyebrow">Mini Game Hub</p>
+          <h1 id="app-title">Pocket Arcade</h1>
+          <p class="subtitle">Pick a game and jump right in.</p>
+        </header>
+
+        <section class="hero panel" aria-label="Pocket Arcade featured card">
+          <p class="hero__label">Featured</p>
+          <h2>Connect 4</h2>
+          <p>Fast local multiplayer on one device.</p>
+          <button class="cta-button" type="button" data-game="connect4">Play Connect 4</button>
+        </section>
+
+        <nav class="game-grid" aria-label="Game selection">
+          <button class="game-tile game-tile--primary" type="button" data-game="connect4">
+            <span class="game-tile__title">Connect 4</span>
+            <span class="game-tile__status">Ready to play</span>
+          </button>
+
+          <button class="game-tile" type="button" disabled>
+            <span class="game-tile__title">Tic-Tac-Toe</span>
+            <span class="game-tile__status">Coming Soon</span>
+          </button>
+
+          <button class="game-tile" type="button" disabled>
+            <span class="game-tile__title">2048</span>
+            <span class="game-tile__status">Coming Soon</span>
+          </button>
+
+          <button class="game-tile" type="button" disabled>
+            <span class="game-tile__title">Memory Match</span>
+            <span class="game-tile__status">Coming Soon</span>
+          </button>
+
+          <button class="game-tile" type="button" disabled>
+            <span class="game-tile__title">Snake</span>
+            <span class="game-tile__status">Coming Soon</span>
+          </button>
+
+          <button class="game-tile" type="button" disabled>
+            <span class="game-tile__title">Word Blitz</span>
+            <span class="game-tile__status">Coming Soon</span>
+          </button>
+        </nav>
+
+        <p class="menu-note">More games coming soon — built for quick mobile sessions.</p>
+      </section>
+
+      <!-- GAME VIEW: active game surface. -->
+      <section class="view" id="game-view" aria-labelledby="game-title" hidden>
+        <header class="game-header panel">
+          <button class="ghost-button" type="button" data-action="back-to-menu">← Menu</button>
+          <div class="game-meta">
+            <p class="eyebrow">Now Playing</p>
+            <h2 id="game-title">Connect 4</h2>
+          </div>
+          <button
+            class="icon-button"
+            type="button"
+            data-action="toggle-drawer"
+            aria-expanded="false"
+            aria-controls="game-drawer"
+          >
+            ☰
+          </button>
+        </header>
+
+        <aside class="drawer panel" id="game-drawer" hidden>
+          <h3>Game Menu</h3>
+          <button class="drawer-button" type="button" data-action="show-instructions">Instructions</button>
+          <button class="drawer-button" type="button" data-action="toggle-sound">Sound: Off</button>
+          <button class="drawer-button drawer-button--danger" type="button" data-action="quit-game">Quit Game</button>
+        </aside>
+
+        <section class="game-stage panel" aria-label="Connect 4 game board">
+          <div class="game-stage__top">
+            <p class="turn-indicator" id="c4-turn-indicator">
+              <span class="turn-dot turn-dot--p1" id="c4-turn-dot"></span>
+              <span id="c4-status">Player 1's turn</span>
+            </p>
+            <button class="ghost-button" type="button" id="c4-reset">New Round</button>
+          </div>
+
+          <div class="board" id="c4-board" role="grid" aria-label="Connect 4 board"></div>
+        </section>
+
+        <p class="game-note">Local multiplayer • Pass-and-play on one device</p>
+      </section>
+    </main>
+
+    <div class="toast" id="app-toast" role="status" aria-live="polite" hidden></div>
+
+    <script src="scripts/games/connect4.js"></script>
+    <script src="scripts/app.js"></script>
+  </body>
+</html>
