@@ -74,7 +74,13 @@
             <p class="eyebrow">Now Playing</p>
             <h2 id="game-title">Connect 4</h2>
           </div>
-          <button class="icon-button" type="button" data-action="toggle-drawer" aria-expanded="false" aria-controls="game-drawer">
+          <button
+            class="icon-button"
+            type="button"
+            data-action="toggle-drawer"
+            aria-expanded="false"
+            aria-controls="game-drawer"
+          >
             ☰
           </button>
         </header>
@@ -86,8 +92,16 @@
           <button class="drawer-button drawer-button--danger" type="button" data-action="quit-game">Quit Game</button>
         </aside>
 
-        <section class="game-stage panel" aria-label="Connect 4 stage placeholder">
-          <p>Connect 4 board will be rendered here in Phase 3.</p>
+        <section class="game-stage panel" aria-label="Connect 4 game board">
+          <div class="game-stage__top">
+            <p class="turn-indicator" id="c4-turn-indicator">
+              <span class="turn-dot turn-dot--p1" id="c4-turn-dot"></span>
+              <span id="c4-status">Player 1's turn</span>
+            </p>
+            <button class="ghost-button" type="button" id="c4-reset">New Round</button>
+          </div>
+
+          <div class="board" id="c4-board" role="grid" aria-label="Connect 4 board"></div>
         </section>
       </section>
     </main>

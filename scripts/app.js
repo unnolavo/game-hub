@@ -1,7 +1,7 @@
 /*
-  Phase 2 app shell behavior:
-  - Single-page view switching with smoother transitions
-  - In-game drawer actions (instructions, sound placeholder, quit)
+  App shell behavior
+  - Single-page view switching
+  - In-game drawer actions
 */
 
 (function () {
@@ -74,7 +74,7 @@
 
   function showInstructions() {
     closeDrawer();
-    showToast("Drop pieces into columns. First to connect 4 wins.");
+    showToast("Drop into a column. Connect 4 to win. Board full = draw.");
   }
 
   function toggleSound() {
@@ -83,10 +83,15 @@
     showToast(`Sound ${soundOn ? "enabled" : "disabled"} (placeholder)`);
   }
 
+  function quitGame() {
+    window.Connect4?.reset?.();
+    showMenu();
+  }
+
   connect4Buttons.forEach((button) => button.addEventListener("click", showGame));
   backButton?.addEventListener("click", showMenu);
   drawerToggleButton?.addEventListener("click", toggleDrawer);
   instructionsButton?.addEventListener("click", showInstructions);
   toggleSoundButton?.addEventListener("click", toggleSound);
-  quitGameButton?.addEventListener("click", showMenu);
+  quitGameButton?.addEventListener("click", quitGame);
 })();
