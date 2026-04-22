@@ -18,13 +18,20 @@
   </head>
   <body>
     <main class="app-shell" id="app">
-      <!-- MENU VIEW: this is the home screen where users pick games. -->
+      <!-- MENU VIEW: home screen for selecting games. -->
       <section class="view view--active" id="menu-view" aria-labelledby="app-title">
-        <header class="menu-header">
+        <header class="menu-header panel">
           <p class="eyebrow">Mini Game Hub</p>
           <h1 id="app-title">Pocket Arcade</h1>
-          <p class="subtitle">Tap a game to play. More titles are on the way.</p>
+          <p class="subtitle">Pick a game and jump right in.</p>
         </header>
+
+        <section class="hero panel" aria-label="Pocket Arcade featured card">
+          <p class="hero__label">Featured</p>
+          <h2>Connect 4</h2>
+          <p>Fast local multiplayer on one device.</p>
+          <button class="cta-button" type="button" data-game="connect4">Play Connect 4</button>
+        </section>
 
         <nav class="game-grid" aria-label="Game selection">
           <button class="game-tile game-tile--primary" type="button" data-game="connect4">
@@ -59,21 +66,33 @@
         </nav>
       </section>
 
-      <!-- GAME VIEW: this will hold active game UI. Hidden by default in Phase 1. -->
+      <!-- GAME VIEW: active game surface. -->
       <section class="view" id="game-view" aria-labelledby="game-title" hidden>
-        <header class="game-header">
+        <header class="game-header panel">
           <button class="ghost-button" type="button" data-action="back-to-menu">← Menu</button>
           <div class="game-meta">
             <p class="eyebrow">Now Playing</p>
             <h2 id="game-title">Connect 4</h2>
           </div>
+          <button class="icon-button" type="button" data-action="toggle-drawer" aria-expanded="false" aria-controls="game-drawer">
+            ☰
+          </button>
         </header>
 
-        <section class="game-stage" aria-label="Connect 4 stage placeholder">
+        <aside class="drawer panel" id="game-drawer" hidden>
+          <h3>Game Menu</h3>
+          <button class="drawer-button" type="button" data-action="show-instructions">Instructions</button>
+          <button class="drawer-button" type="button" data-action="toggle-sound">Sound: Off</button>
+          <button class="drawer-button drawer-button--danger" type="button" data-action="quit-game">Quit Game</button>
+        </aside>
+
+        <section class="game-stage panel" aria-label="Connect 4 stage placeholder">
           <p>Connect 4 board will be rendered here in Phase 3.</p>
         </section>
       </section>
     </main>
+
+    <div class="toast" id="app-toast" role="status" aria-live="polite" hidden></div>
 
     <script src="scripts/games/connect4.js"></script>
     <script src="scripts/app.js"></script>
