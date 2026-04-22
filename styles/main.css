@@ -306,6 +306,36 @@ button:disabled {
   outline-offset: 1px;
 }
 
+
+.cell--drop {
+  animation: chipDrop 220ms ease;
+}
+
+.cell--winner {
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.82),
+    0 0 14px rgba(255, 255, 255, 0.35);
+}
+
+.cell--preview-p1 {
+  background: rgba(239, 78, 78, 0.36);
+}
+
+.cell--preview-p2 {
+  background: rgba(245, 183, 59, 0.42);
+}
+
+@keyframes chipDrop {
+  from {
+    transform: translateY(-10px);
+    filter: brightness(1.3);
+  }
+  to {
+    transform: translateY(0);
+    filter: brightness(1);
+  }
+}
+
 .toast {
   position: fixed;
   left: 50%;
