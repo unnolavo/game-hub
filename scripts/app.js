@@ -59,6 +59,19 @@
   let toastTimer = 0;
   const stats = loadStats();
 
+  function setChildren(element, children) {
+    while (element.firstChild) element.removeChild(element.firstChild);
+    if (Array.isArray(children)) {
+      children.forEach((child) => element.appendChild(child));
+      return;
+    }
+    if (children) element.appendChild(children);
+  }
+
+  function destroyActiveGame() {
+    if (activeApi && typeof activeApi.destroy === "function") activeApi.destroy();
+  }
+
   function loadStats() {
     try {
       return JSON.parse(localStorage.getItem("frostbyte-arcade-stats")) || {};
@@ -109,7 +122,7 @@
       fragment.appendChild(tile);
     });
 
-    gameGrid.replaceChildren(fragment);
+    setChildren(gameGrid, fragment);
   }
 
   function setScores(items) {
@@ -119,7 +132,7 @@
       card.innerHTML = `<span class="stat-label">${label}</span><strong>${value}</strong>`;
       return card;
     });
-    scoreStrip.replaceChildren(...cards);
+    setChildren(scoreStrip, cards);
   }
 
   function openGame(gameId) {
@@ -129,12 +142,12 @@
       return;
     }
 
-    activeApi?.destroy?.();
+    destroyActiveGame();
     activeGame = game;
     gameTitle.textContent = game.title;
     gameKicker.textContent = game.kicker;
-    gameStage.replaceChildren();
-    controlDeck.replaceChildren();
+    setChildren(gameStage);
+    setChildren(controlDeck);
     setScores([{ label: "Loading", value: "Ready" }, { label: "Mode", value: game.tags[0] }, { label: "Best", value: "-" }]);
 
     activeApi = game.module.mount({
@@ -153,7 +166,7 @@
   }
 
   function backToHub() {
-    activeApi?.destroy?.();
+    destroyActiveGame();
     activeApi = null;
     activeGame = null;
     gameView.classList.remove("view--active");
@@ -164,9 +177,12 @@
     }, 160);
   }
 
-  document.querySelector('[data-action="back-to-hub"]')?.addEventListener("click", backToHub);
-  document.querySelector('[data-action="restart-game"]')?.addEventListener("click", () => {
-    activeApi?.restart?.();
+  const backButton = document.querySelector('[data-action="back-to-hub"]');
+  const restartButton = document.querySelector('[data-action="restart-game"]');
+
+  if (backButton) backButton.addEventListener("click", backToHub);
+  if (restartButton) restartButton.addEventListener("click", () => {
+    if (activeApi && typeof activeApi.restart === "function") activeApi.restart();
     if (activeGame) showToast(`${activeGame.title} restarted`);
   });
 

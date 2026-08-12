@@ -1,10 +1,15 @@
 (function () {
+  function setChildren(element, child) {
+    while (element.firstChild) element.removeChild(element.firstChild);
+    if (child) element.appendChild(child);
+  }
+
   function mount({ stage, controls, setScores, toast }) {
     const canvas = document.createElement("canvas");
     canvas.className = "arcade-canvas";
     canvas.width = 720;
     canvas.height = 720;
-    stage.replaceChildren(canvas);
+    setChildren(stage, canvas);
     const ctx = canvas.getContext("2d");
     controls.innerHTML = `
       <div class="control-row"><button class="arcade-control" type="button" data-dir="up">▲</button></div>

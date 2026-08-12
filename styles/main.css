@@ -550,20 +550,77 @@ h1 {
 }
 
 @media (max-width: 430px) {
+  .app-shell {
+    padding: 10px;
+  }
+
+  .view {
+    gap: 10px;
+  }
+
+  .hub-hero {
+    min-height: 190px;
+  }
+
+  .hero-copy {
+    padding: 16px 14px;
+  }
+
   h1 {
-    font-size: 2.6rem;
+    max-width: none;
+    font-size: 2.35rem;
+    line-height: 0.98;
   }
 
   .subtitle {
-    font-size: 0.98rem;
+    max-width: 20rem;
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+
+  .hero-rink {
+    width: 190px;
+    right: -64px;
+    bottom: -36px;
+    opacity: 0.48;
+  }
+
+  .hub-toolbar {
+    gap: 7px;
+  }
+
+  .hub-toolbar > div,
+  .score-card {
+    min-height: 54px;
+    padding: 8px;
+  }
+
+  .game-grid {
+    gap: 8px;
   }
 
   .game-tile {
-    min-height: 168px;
+    min-height: 150px;
+    gap: 10px;
+    padding: 10px;
   }
 
   .tile-art {
-    height: 58px;
+    height: 44px;
+  }
+
+  .game-tile h2 {
+    font-size: 1rem;
+  }
+
+  .game-tile p {
+    font-size: 0.82rem;
+    line-height: 1.25;
+  }
+
+  .tag {
+    padding: 4px 6px;
+    font-size: 0.68rem;
   }
 
   .memory-grid {

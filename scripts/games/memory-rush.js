@@ -1,10 +1,15 @@
 (function () {
   const symbols = ["A", "B", "C", "D", "E", "F", "G", "H"];
 
+  function setChildren(element, child) {
+    while (element.firstChild) element.removeChild(element.firstChild);
+    if (child) element.appendChild(child);
+  }
+
   function mount({ stage, controls, setScores, toast, stats, saveStats }) {
     const grid = document.createElement("div");
     grid.className = "memory-grid";
-    stage.replaceChildren(grid);
+    setChildren(stage, grid);
     controls.innerHTML = `<div class="control-row"><button class="pill-button" type="button" data-action="shuffle">Shuffle</button></div>`;
 
     let deck = [];
@@ -32,7 +37,7 @@
     }
 
     function render() {
-      grid.replaceChildren();
+      setChildren(grid);
       deck.forEach((card, index) => {
         const button = document.createElement("button");
         button.className = "memory-card";

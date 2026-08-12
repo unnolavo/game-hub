@@ -4,6 +4,11 @@
   const HUMAN = 1;
   const CPU = 2;
 
+  function setChildren(element, child) {
+    while (element.firstChild) element.removeChild(element.firstChild);
+    if (child) element.appendChild(child);
+  }
+
   function createBoard() {
     return Array.from({ length: ROWS }, () => Array(COLS).fill(0));
   }
@@ -94,8 +99,9 @@
     boardEl.className = "c4-board";
     boardEl.setAttribute("role", "grid");
     boardEl.setAttribute("aria-label", "Connect 4 board");
-    wrap.append(columns, boardEl);
-    stage.replaceChildren(wrap);
+    wrap.appendChild(columns);
+    wrap.appendChild(boardEl);
+    setChildren(stage, wrap);
 
     const modeSwitch = document.createElement("div");
     modeSwitch.className = "mode-switch";
@@ -103,7 +109,7 @@
       <button class="pill-button" type="button" data-mode="ai" aria-pressed="true">Vs AI</button>
       <button class="pill-button" type="button" data-mode="local" aria-pressed="false">2 Players</button>
     `;
-    controls.replaceChildren(modeSwitch);
+    setChildren(controls, modeSwitch);
 
     function updateScores() {
       const status = state.winner
@@ -119,8 +125,8 @@
     }
 
     function render() {
-      columns.replaceChildren();
-      boardEl.replaceChildren();
+      setChildren(columns);
+      setChildren(boardEl);
       const winSet = new Set(state.winningCells.map((cell) => `${cell.row}:${cell.col}`));
 
       for (let col = 0; col < COLS; col += 1) {
@@ -142,7 +148,9 @@
           if (state.board[row][col] === 1) cell.classList.add("c4-cell--p1");
           if (state.board[row][col] === 2) cell.classList.add("c4-cell--p2");
           if (winSet.has(`${row}:${col}`)) cell.classList.add("c4-cell--win");
-          if (state.lastMove?.row === row && state.lastMove?.col === col) cell.classList.add("c4-cell--drop");
+          if (state.lastMove && state.lastMove.row === row && state.lastMove.col === col) {
+            cell.classList.add("c4-cell--drop");
+          }
           boardEl.appendChild(cell);
         }
       }
