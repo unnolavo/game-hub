@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Frostbyte Arcade</title>
+    <meta
+      name="description"
+      content="Frostbyte Arcade is a polished mobile-first mini game hub with Arctic Drift, Connect 4, Circuit Snake, and Memory Rush."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <main class="app-shell" id="app">
+      <section class="view view--active" id="hub-view" aria-labelledby="app-title">
+        <header class="hub-hero" aria-label="Frostbyte Arcade">
+          <div class="hero-copy">
+            <p class="eyebrow">Mini Game Hub</p>
+            <h1 id="app-title">Frostbyte Arcade</h1>
+            <p class="subtitle">A fast, polished pocket arcade built for quick sessions and pass-and-play battles.</p>
+          </div>
+          <div class="hero-rink" aria-hidden="true">
+            <span class="rink-car"></span>
+            <span class="rink-coin rink-coin--one"></span>
+            <span class="rink-coin rink-coin--two"></span>
+            <span class="rink-coin rink-coin--three"></span>
+          </div>
+        </header>
+
+        <section class="hub-toolbar" aria-label="Arcade status">
+          <div>
+            <span class="stat-label">Games</span>
+            <strong>4 ready</strong>
+          </div>
+          <div>
+            <span class="stat-label">Best Drift</span>
+            <strong id="best-drift">0</strong>
+          </div>
+          <div>
+            <span class="stat-label">Streak</span>
+            <strong id="hub-streak">0</strong>
+          </div>
+        </section>
+
+        <nav class="game-grid" id="game-grid" aria-label="Game selection"></nav>
+      </section>
+
+      <section class="view" id="game-view" aria-labelledby="game-title" hidden>
+        <header class="game-header">
+          <button class="icon-button" type="button" data-action="back-to-hub" aria-label="Back to hub">
+            <span aria-hidden="true">‹</span>
+          </button>
+          <div class="game-meta">
+            <p class="eyebrow" id="game-kicker">Now Playing</p>
+            <h2 id="game-title">Arctic Drift</h2>
+          </div>
+          <button class="icon-button" type="button" data-action="restart-game" aria-label="Restart game">
+            <span aria-hidden="true">↻</span>
+          </button>
+        </header>
+
+        <section class="score-strip" id="score-strip" aria-label="Game stats"></section>
+
+        <section class="game-stage" id="game-stage" aria-live="polite"></section>
+
+        <section class="control-deck" id="control-deck" aria-label="Game controls"></section>
+      </section>
+    </main>
+
+    <div class="toast" id="app-toast" role="status" aria-live="polite" hidden></div>
+
+    <script src="scripts/games/connect4.js"></script>
+    <script src="scripts/games/arctic-drift.js"></script>
+    <script src="scripts/games/snake.js"></script>
+    <script src="scripts/games/memory-rush.js"></script>
+    <script src="scripts/app.js"></script>
+  </body>
+</html>
